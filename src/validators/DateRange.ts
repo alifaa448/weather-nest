@@ -4,6 +4,7 @@ import {
 } from 'class-validator';
 
 import { convertToUTC } from '../helpers/convertToUTC';
+import { answers } from '../constants/answers';
 
 /**
  * @class DateRange implementing custom validation logic on the date belonging to the interval.
@@ -24,6 +25,6 @@ export class DateRange implements ValidatorConstraintInterface {
   }
 
   defaultMessage() {
-    return 'The date ($value) must be within the next 7 days.';
+    return answers.error.invalidDateValue;
   }
 }

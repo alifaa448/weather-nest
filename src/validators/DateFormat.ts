@@ -3,6 +3,8 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 
+import { answers } from '../constants/answers';
+
 /**
  * @class DateFormat implementing custom validation logic for checking the date for the correct format.
  * @param {string} date Formatting date.
@@ -17,6 +19,6 @@ export class DateFormat implements ValidatorConstraintInterface {
   }
 
   defaultMessage() {
-    return 'Date ($value) has an invalid date format (mm-dd-yyyy or mm/dd/yyyy)';
+    return answers.error.invalidDateFormat;
   }
 }
