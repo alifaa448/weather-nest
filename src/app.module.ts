@@ -3,11 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { WeatherModule } from './modules/weather.module';
 
 @Module({
   imports: [
+    WeatherModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],
@@ -19,7 +19,7 @@ import { AppService } from './app.service';
       debug: true,
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
