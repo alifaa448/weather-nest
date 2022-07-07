@@ -73,5 +73,60 @@ describe('WeatherService', () => {
         });
       });
     });
+
+    it('should return the weather description on 14 July, 2022', async () => {
+      const latitude = 42.98;
+      const longitude = -81.23;
+      const date = '07/14/2022';
+
+      const expectedResponse = {
+        data: 'clear sky',
+      };
+
+      const response = await service.getWeather({
+        lat: latitude,
+        lng: longitude,
+        date,
+      });
+      expect(response).toEqual(expectedResponse);
+    });
+
+    it('should return invalid longitude value error', async () => {
+      const latitude = 42.98;
+      const longitude = 260;
+      const date = '07/14/2022';
+
+      try {
+        await service.getWeather({
+          lat: latitude,
+          lng: longitude,
+          date,
+        });
+      } catch (error) {
+        expect(error.response.data).toStrictEqual({
+          cod: '400',
+          message: 'wrong longitude',
+        });
+      }
+    });
+
+    it('should return invalid latitude value error', async () => {
+      const latitude = 100;
+      const longitude = -81.23;
+      const date = '07/14/2022';
+
+      try {
+        await service.getWeather({
+          lat: latitude,
+          lng: longitude,
+          date,
+        });
+      } catch (error) {
+        expect(error.response.data).toStrictEqual({
+          cod: '400',
+          message: 'wrong latitude',
+        });
+      }
+    });
   });
 });
