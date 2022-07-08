@@ -28,7 +28,7 @@ export class WeatherService {
     const dailyData = await this.getWeatherDailyData(lat, lng);
     const descByDate = this.findDescriptionByDate(dailyData, date);
 
-    if (!descByDate) {
+    if (!descByDate || !descByDate.weather?.[0] || !descByDate.weather[0].description) {
       return {
         statusCode: HttpStatus.NO_CONTENT,
         message: answers.error.emptyObject,
@@ -66,7 +66,7 @@ export class WeatherService {
         .pipe(map((response) => response?.data?.daily)),
     );
 
-    if (!response) {
+    if (!response && response.length === 0) {
       throw new HttpException(answers.error.notFoundData, HttpStatus.NOT_FOUND);
     }
 

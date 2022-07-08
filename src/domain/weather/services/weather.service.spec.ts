@@ -118,6 +118,26 @@ describe.only('WeatherService', () => {
       expect(response).toEqual(expectedResponse);
     });
 
+    it('should return weather data for a given date was not found error', async () => {
+      const latitude = 42.98;
+      const longitude = -81.23;
+      const date = '07/14/2022';
+
+      const expectedResponse = {
+        message: "The weather forecast for the specified date was not found.",
+        statusCode: 204
+      };
+
+      service.findDescriptionByDate = jest.fn().mockResolvedValue({});
+
+      const response = await service.getWeather({
+        lat: latitude,
+        lng: longitude,
+        date,
+      });
+      expect(response).toStrictEqual(expectedResponse);
+    });
+
     it('should return invalid longitude value error', async () => {
       const latitude = 42.98;
       const longitude = 260;
