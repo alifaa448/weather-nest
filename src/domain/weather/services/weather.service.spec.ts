@@ -123,7 +123,7 @@ describe('WeatherService', () => {
         const date = '07/14/2022';
 
         const expectedResponse = {
-          data: 'clear sky',
+          data: 'broken clouds',
         };
 
         const response = await service.getWeather({
